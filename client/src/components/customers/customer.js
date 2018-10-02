@@ -9,16 +9,21 @@ class Customers extends Component {
     }
   }
 
-  componentDidMount() {
-    fetch('/products')
-      .then(res => res.json())
-      .then(customers =>
-        this.setState(
-          {customers},
-          () => console.log(customers.message)
-        )
-      );
-  }
+  fetchedBtn = () => {
+    fetch("/products", {
+      method: "POST",
+      dataType: "JSON"
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .then((err) => {
+      console.log(err);
+    })
+  };
 
   render() {
     return (
@@ -29,7 +34,8 @@ class Customers extends Component {
             <li key={customer.id}>{customer.firstName} {customer.lastName}</li>
           )}
         </ul> */}
-        {this.state.customers.message}
+        <button onClick={this.fetchedBtn}>click me</button>
+        {this.state.customers.res}
       </div>
     );
   }
