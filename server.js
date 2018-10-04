@@ -4,12 +4,11 @@ const express = require('express');
 const app = express();
 
 //routes
-const productRoutes = require('./controller/routes/product/products');
 const configurationRoutes = require('./controller/routes/configuration/db');
+const usersRouters = require('./controller/routes/user/user')
 
-
-app.use('/products', productRoutes);
 app.use('/configuration', configurationRoutes);
+app.use('/user', usersRouters);
 
 app.use((req, res, next) => {
   const error = new Error('not found');
@@ -17,7 +16,7 @@ app.use((req, res, next) => {
   next(error);
 });
 
-app.use((error, req, res, next) => {
+app.use((error, req, res, next) => {0
   res.status(error.status || 500);
   res.json({
     error: {
