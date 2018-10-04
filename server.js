@@ -5,8 +5,11 @@ const app = express();
 
 //routes
 const productRoutes = require('./controller/routes/product/products');
+const configurationRoutes = require('./controller/routes/configuration/db');
+
 
 app.use('/products', productRoutes);
+app.use('/configuration', configurationRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('not found');
@@ -22,15 +25,6 @@ app.use((error, req, res, next) => {
     }
   });
 });
-
-// app.get('/api/customers', (req, resp) => {
-//   const customers = [
-//     {id: 0, firstName: 'Vasyl', lastName: 'honcharenko'},
-//     {id: 1, firstName: 'one', lastName: 'one'},
-//     {id: 2, firstName:  'some', lastName: 'some'}
-//   ];
-//   resp.json(customers);
-// })
 
 const port = 5050;
 

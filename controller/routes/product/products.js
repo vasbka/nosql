@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../../db')
+const models = require('../configuration/DB.js')
 
-router.post('/', (req, res, next) => {
-  try {
-    var res = pool.query('INSERT INTO users(id, firstName) values (0, "honcharenko");');
-  } catch(err) {
-    throw new Error(err);
-  }
-  console.log(err);
+router.get('/reset', (req, res, next) => {
+  console.log("GET");
   res.status(200).json({
-    res: res
+    res: models.rmAll()
+  });
+})
+router.post('/reset', (req, res, next) => {  
+  res.status(200).json({
+    res: models.rmAll()
   });
 });
 

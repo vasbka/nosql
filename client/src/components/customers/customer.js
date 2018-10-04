@@ -5,27 +5,29 @@ class Customers extends Component {
   constructor() {
     super();
     this.state = {
-      customers: {}
+      customers: {
+        index: 0
+      }
     }
   }
 
   fetchedBtn = () => {
-    fetch("/products", {
+    fetch("/configuration/rmAll", {
       method: "POST",
       dataType: "JSON"
     })
-    .then((res) => {
-      console.log(res);
-    })
-    .then((data) => {
-      console.log(data);
-    })
-    .then((err) => {
-      console.log(err);
-    })
+    .then((res) => res.json())
+    .then((result) => {
+      this.setState({
+        customers: {
+          index: result.qwer
+        }
+      })
+    });
   };
 
   render() {
+    const { customers } = this.state;
     return (
       <div className="App">
         <h2>Customers</h2>
@@ -34,8 +36,9 @@ class Customers extends Component {
             <li key={customer.id}>{customer.firstName} {customer.lastName}</li>
           )}
         </ul> */}
-        <button onClick={this.fetchedBtn}>click me</button>
-        {this.state.customers.res}
+        <button onClick={this.fetchedBtn}>
+          {customers.index}
+        </button>
       </div>
     );
   }
