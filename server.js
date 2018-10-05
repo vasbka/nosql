@@ -4,12 +4,12 @@ const express = require('express');
 const app = express();
 
 //routes
-const productRoutes = require('./controller/routes/product/products');
+const userRoutes = require('./controller/routes/user/user');
 const configurationRoutes = require('./controller/routes/configuration/db');
 
 
-app.use('/products', productRoutes);
 app.use('/configuration', configurationRoutes);
+app.use('/user', userRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('not found');

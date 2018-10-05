@@ -4,7 +4,7 @@ const mysql = require('mysql')
 var config = require('../config.js');
 
 const pool = mysql.createPool({
-    connectionLimit: 10,
+    connectionLimit: 100,
     host: config.dbConfig.host,
     user: config.dbConfig.user,
     password: config.dbConfig.password,
@@ -13,6 +13,7 @@ const pool = mysql.createPool({
 
 // Ping database to check for common exception errors.
 pool.getConnection((err, connection) => {
+   if(connection) connection.release();
     if (err) {
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
             console.error('Database connection was closed.')
@@ -25,7 +26,7 @@ pool.getConnection((err, connection) => {
         }
     }
 
-    if (connection) connection.release()
+    // if (connection) connection.release()
 
     return
 })
