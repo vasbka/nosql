@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const models = require('../configuration/db.js')
+const pool = require('../db')
 
 router.get('/reset', (req, res, next) => {
   console.log("GET");

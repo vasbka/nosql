@@ -11,20 +11,20 @@ class Customers extends Component {
     }
   }
 
-  fetchedBtn = () => {
-    fetch("/configuration/rmAll", {
-      method: "POST",
-      dataType: "JSON"
-    })
-    .then((res) => res.json())
-    .then((result) => {
-      this.setState({
-        customers: {
-          index: result.qwer
-        }
-      })
-    });
-  };
+  // fetchedBtn = () => {
+  //   fetch("/configuration/rmAll", {
+  //     method: "POST",
+  //     dataType: "JSON"
+  //   })
+  //   .then((res) => res.json())
+  //   .then((result) => {
+  //     this.setState({
+  //       customers: {
+  //         index: result.qwer
+  //       }
+  //     })
+  //   });
+  // };
 
   render() {
     const { customers } = this.state;
@@ -36,9 +36,9 @@ class Customers extends Component {
             <li key={customer.id}>{customer.firstName} {customer.lastName}</li>
           )}
         </ul> */}
-        <button onClick={this.fetchedBtn}>
+        {/* <button onClick={this.fetchedBtn}>
           {customers.index}
-        </button>
+        </button> */}
       </div>
     );
   }
