@@ -5,6 +5,7 @@ class User extends Component {
   constructor() {
     super();
     this.state = {
+<<<<<<< HEAD
       user: {
         index: 0
       }
@@ -39,6 +40,36 @@ class User extends Component {
         {/* <button onClick={this.fetchedBtn}>
           {customers.index}
         </button> */}
+=======
+      users: []
+    }
+  }
+
+  componentWillMount() {
+    // fetch("/configuration/init", {
+    //   method: "GET"
+    // });
+    fetch("/user", {
+      method: "GET",
+      dataType: "JSON"
+    })
+    .then((users) => users.json())
+    .then((usr) => {
+      this.setState({
+        users: usr
+      })
+    })
+    console.log(this.props.users);
+  }
+  render() {
+    console.log(this.props.users);
+    // const users = (this.props.users).map((user) => <li>{user.id}</li>)
+    return (
+      <div>
+        <ul>
+          {/* {users} */}
+        </ul>
+>>>>>>> 6afe042feb0ae872b3e6d7d203f3e23bb9c5f0db
       </div>
     );
   }
