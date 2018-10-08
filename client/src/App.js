@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import Customers from './components/customers/customer';
 import User from './components/user/user';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
@@ -11,8 +10,8 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <div className="navbar">            
-            <h1 className="App-title">Welcome to React</h1>
+          <div className="navbar">
+
             <ul>
               <li>
                 <Link to="/user"> User</Link>
