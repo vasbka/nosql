@@ -18,7 +18,7 @@ function Container({ location }) {
           <section className="route-section">
             <Switch location={location}>
               <Route exact path="/" component={User} />
-              <Route path="/first" component={Customer} />
+              <Route path="/" component={Customer} />
             </Switch>
           </section>
         </CSSTransition>
@@ -28,7 +28,7 @@ function Container({ location }) {
 }
 
 const Wrapper = styled.div`
-  .fade-enter {    
+  .fade-enter {
     opacity: 0.01;
   }
 

@@ -10,6 +10,14 @@ class User extends Component {
       }
     }
   }
+  let f = () => {
+    fetch("/user", {
+      method: "GET",
+      dataType: "JSON"
+    })
+    .then(data => data.json())
+    .then(data => console.log(data));
+  }
 
   render() {
     const { customers } = this.state;

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db')
 
-router.get('/getAll', (req, res, next) => {
+router.get('/', (req, res, next) => {
   var res;
   try {
     pool.query('SELECT * FROM user;', function(err, res, fields) {
