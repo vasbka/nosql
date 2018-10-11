@@ -9,6 +9,9 @@ class User extends Component {
   }
 
   componentWillMount() {
+    fetch("/configuration/rmAll", {
+      method: "GET"
+    });
     // fetch("/configuration/init", {
     //   method: "GET"
     // });
