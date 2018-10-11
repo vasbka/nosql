@@ -1,0 +1,12 @@
+#root {
+  transition: 0.3s;
+}
+.App {
+  transition: 0.4s;
+}
+.navbar{
+  background-color: #123;
+  & li{
+    background-color: #fff;
+  }
+}

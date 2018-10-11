@@ -98,3 +98,9 @@
   'Not null':
     'prefix': 'nn'
     'body': 'NOT NULL'
+
+  'Insert into':
+    'prefix': 'ii'
+    'body': """
+      INSERT INTO $1 VALUES($2);
+    """

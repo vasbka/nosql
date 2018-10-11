@@ -4,11 +4,13 @@ const express = require('express');
 const app = express();
 
 //routes
-const configurationRoutes = require('./controller/routes/configuration/db');
-const usersRouters = require('./controller/routes/user/user')
+const userRoutes = require('./controller/routes/user');
+const configurationRoutes = require('./controller/routes/db-handler');
+const customerRouters = require('./controller/routes/customer');
 
 app.use('/configuration', configurationRoutes);
-app.use('/user', usersRouters);
+app.use('/user', userRoutes);
+app.use('/customer', customerRouters);
 
 app.use((req, res, next) => {
   const error = new Error('not found');
