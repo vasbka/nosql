@@ -5,10 +5,17 @@ class User extends Component {
   constructor() {
     super();
     this.state = {
-      user: {
-        index: 0
-      }
+      users: []
     }
+  }
+
+  onClick = () => {
+    fetch("/user", {
+      method: "GET",
+      dataType: "JSON"
+    })
+    .then(data => data.json())
+    .then(users => this.setState({users}, console.log(users)));
   }
 
   render() {
@@ -16,6 +23,12 @@ class User extends Component {
     return (
       <div className="App">
         <h2>users</h2>
+        <input type="submit" onClick={this.onClick}/>
+        <ul>
+          {this.state.users.map(user =>
+            <li key={user.id}>{user.lastName}</li>
+          )}
+        </ul>
       </div>
     );
   }
