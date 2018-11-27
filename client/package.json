@@ -50,6 +50,10 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
+<<<<<<< HEAD
+=======
+  "proxy": "http://localhost:5000",
+>>>>>>> 9ae97324ede1b74d6e3015d575855f8f529c70dc
   "devDependencies": {
     "node-sass": "^4.9.3",
     "react-transition-group": "^2.5.0",

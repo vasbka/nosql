@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   background-color: #f5f5f5;
   ul {
     margin: 0;
-    padding: 0;    
+    padding: 0;
   }
   li {
     display: inline-block;
