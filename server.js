@@ -1,13 +1,17 @@
 const express = require('express');
-const session = require('express-session');
 //init
 const app = express();
-app.use(session({secret: "Shh, its a secret!"}));
+const bodyParser = require("body-parser");
+// app.use(session({secret: "Shh, its a secret!"}));
 //routes
 const userRoutes = require('./controller/routes/user');
 const configurationRoutes = require('./controller/routes/db-handler');
 const customerRouters = require('./controller/routes/customer');
 
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 
 app.use('/configuration', configurationRoutes);
@@ -21,6 +25,6 @@ app.use((error, req, res, next) => {0
   });
 });
 
-const port = 5000;
+const port = 5444;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

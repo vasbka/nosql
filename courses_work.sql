@@ -154,6 +154,3 @@ VALUES
 	(1, 2, 140),
 	(1, 3, 180);
 
-INSERT INTO admin(login, password)
-VALUES ("admin","adminpassword");
-
