@@ -7,16 +7,16 @@ function Header() {
     <Wrapper>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">User</Link>
         </li>
         <li>
-          <Link to="/first">First</Link>
+          <Link to="/faculty">Faculty</Link>
         </li>
         <li>
-          <Link to="/second">Second</Link>
+          <Link to="/Subject">Subject</Link>
         </li>
         <li>
-          <Link to="/third">Third</Link>
+          <Link to="/Statement">Statement</Link>
         </li>
       </ul>
     </Wrapper>

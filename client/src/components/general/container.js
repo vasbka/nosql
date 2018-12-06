@@ -4,7 +4,8 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import User from  '../entity/user';
-import Customer from  '../entity/customer';
+import Faculty from  '../entity/faculty';
+
 
 function Container({ location }) {
   return (
@@ -18,7 +19,7 @@ function Container({ location }) {
           <section className="route-section">
             <Switch location={location}>
               <Route exact path="/" component={User} />
-              <Route path="/customer" component={Customer} />
+              <Route path="/faculty" component={Faculty} />
             </Switch>
           </section>
         </CSSTransition>
