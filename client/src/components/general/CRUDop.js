@@ -8,6 +8,15 @@ class CRUDop{
     .then(data => data.json());
   }
 
+  static getByCondition(category, condition) {
+    return fetch("/" + category + "/" + condition.name + "/" + condition.value, {
+      method: "GET",
+      dataType: "JSON"
+    })
+    .then(data => data.json());
+  }
+
+
   static add(category, object) {
     return fetch("/" + category + "/add", {
       method: 'POST',
@@ -41,7 +50,7 @@ class CRUDop{
   }
 
   static save(category, object) {
-    return fetch("/" + category + "/save", {
+    return fetch("/" + category + "/update", {
       method: 'POST',
       headers: {
         'Accept':'application/json',
@@ -54,6 +63,11 @@ class CRUDop{
       return res.status == 200;
     })
   }
+
+  static filter(category, condition) {
+
+  }
+
 }
 
 export default CRUDop;

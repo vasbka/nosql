@@ -18,6 +18,24 @@ router.get('/', (req, res, next) => {
   res.status(500);
 });
 
+router.get('/:attrName/:attrValue', (req, res, next) => {
+  var res;
+  try {
+    pool.query(
+      'SELECT * FROM enrollee WHERE ?? = ?;',
+      [req.params.attrName, req.params.attrValue],
+      function(err, rs, fields) {
+      res.status(200).json(
+        JSON.parse(JSON.stringify(rs))
+      )
+    });
+  } catch(err) {
+    throw new Error(err);
+  }
+  res.status(500);
+});
+
+
 router.post('/add', (req, res, next) => {
   var user = req.body;
   try{
@@ -48,7 +66,7 @@ router.post('/delete', (req, res, next) => {
 });
 
 
-router.post('/save', (req, res, next) => {
+router.post('/update', (req, res, next) => {
   var user = req.body;
   try{
     pool.query('UPDATE enrollee SET firstName = ?, lastName = ?, login = ?, password = ?, email = ? WHERE id = ?',

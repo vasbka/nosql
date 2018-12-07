@@ -13,7 +13,7 @@ function Header() {
           <Link to="/faculty">Faculty</Link>
         </li>
         <li>
-          <Link to="/Subject">Subject</Link>
+          <Link to="/subject">Subject</Link>
         </li>
         <li>
           <Link to="/Statement">Statement</Link>

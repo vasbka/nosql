@@ -5,6 +5,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import User from  '../entity/user';
 import Faculty from  '../entity/faculty';
+import Subject from  '../entity/subject';
 
 
 function Container({ location }) {
@@ -20,6 +21,7 @@ function Container({ location }) {
             <Switch location={location}>
               <Route exact path="/" component={User} />
               <Route path="/faculty" component={Faculty} />
+              <Route path="/subject" component={Subject} />
             </Switch>
           </section>
         </CSSTransition>

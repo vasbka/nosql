@@ -84,9 +84,17 @@ class User extends Component {
     }, 1500);
   }
 
+  filter = () => {
+    var attr = document.getElementsByName('attr')[0].value;
+    var value = document.getElementById('filterValue').value;
+    CRUDop.getByCondition('user', {name: attr, value: value})
+    .then((users) => {
+      this.setState({users})
+    })
+  }
+
 
   render() {
-    const { customers } = this.state;
     return (
       <div className="App">
       <h2>users</h2>
@@ -96,6 +104,20 @@ class User extends Component {
       </nav>
       <div id="message"></div>
         <div className={"users__" + this.state.show[0]}>
+          <div>
+            filter
+            <select name="attr" id="">
+              <option value="id">uid</option>
+              <option value="firstName">first name</option>
+              <option value="lastName">last name</option>
+              <option value="login">login</option>
+              <option value="password">pwd</option>
+              <option value="email">email</option>
+            </select>
+            <input id="filterValue" type="text" placeholder="Введите искомое значение"/>
+            <input type="submit" value="Filter" onClick={this.filter}/>
+            <input type="submit" value="Clear filter" onClick={this.containerByIndex.bind(null, 0)}/>
+          </div>
           <div className="field title">First name</div>
           <div className="field title">Last name</div>
           <div className="field title">Login</div>

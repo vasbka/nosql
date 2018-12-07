@@ -25,17 +25,17 @@ class Faculty extends Component {
 
   addFaculty = () => {
      document.getElementById('message').style.display = 'block';
-    var user = {
+     var faculty = {
       name: document.getElementById('name').value,
-      totalCount: document.getElementById('totalCount').value,
+      generalCount: document.getElementById('generalCount').value,
       budgetCount: document.getElementById('budgetCount').value
     };
-    CRUDop.add('user', JSON.stringify(user))
+    CRUDop.add('faculty', JSON.stringify(faculty))
     .then((res) => {
       if(res){
-        document.getElementById('message').innerHTML = 'Аккаунт был успешно создан';
+        document.getElementById('message').innerHTML = 'Факультет был успешно создан';
       } else {
-        document.getElementById('message').innerHTML = 'Во время создания аккаунта произошла проблема.';
+        document.getElementById('message').innerHTML = 'Во время создания факультета произошла проблема.';
       }
     });
     setTimeout(function() {
@@ -44,15 +44,53 @@ class Faculty extends Component {
   }
 
   deleteFaculty = id => {
-
+    CRUDop.delete('faculty', id)
+    .then((res) => {
+      if(res){
+        document.getElementById('message').innerHTML = 'Факультет был успешно удален.';
+        var faculties = this.state.faculties.filter(function(faculty) { return faculty.id != id });
+        this.setState({ faculties });
+      } else {
+        document.getElementById('message').innerHTML = 'Во время удаления факультета произошла проблема.';
+      }
+    })
   }
 
-  saveFaculty = (id, ind) => {
-    
-  }
+
+    saveFaculty = (id, index) => {
+      document.getElementById('message').style.display = 'block';
+      var fields = document.getElementsByClassName('faculty')[index].getElementsByClassName('field');
+      var faculty = {
+        name: fields[0].value,
+        generalCount: fields[1].value,
+        budgetCount: fields[2].value,
+        id: id
+      };
+
+      CRUDop.save('faculty', JSON.stringify(faculty))
+      .then((data) => {
+        if(data) {
+          document.getElementById('message').innerHTML = 'Фаукльтет был успешно изменен!';
+        } else {
+          document.getElementById('message').innerHTML = 'Во время изменения факультета произошла ошибка';
+        }
+      })
+      setTimeout(function() {
+        document.getElementById('message').style.display = 'none';
+      }, 1500);
+    }
+
+    filter = () => {
+      var attr = document.getElementsByName('attr')[0].value;
+      var value = document.getElementById('filterValue').value;
+      CRUDop.getByCondition('faculty', {name: attr, value: value})
+      .then((faculties) => {
+        this.setState({faculties})
+      })
+    }
+
 
   render() {
-    const { customers } = this.state;
     return (
       <div className="App">
       <h2>Faculties</h2>
@@ -62,29 +100,39 @@ class Faculty extends Component {
      </nav>
      <div id="message"></div>
        <div className={"users__" + this.state.show[0]}>
+         <div>
+           filter
+           <select name="attr" id="">
+             <option value="id">uid</option>
+             <option value="name">name</option>
+             <option value="generalCount">total count</option>
+             <option value="budgetCount">budget count</option>
+           </select>
+           <input id="filterValue" type="text" placeholder="Введите искомое значение"/>
+           <input type="submit" value="Filter" onClick={this.filter}/>
+           <input type="submit" value="Clear filter" onClick={this.containerByIndex.bind(null, 0)}/>
+         </div>
          <div className="field title">Name</div>
          <div className="field title">Total count</div>
          <div className="field title">Budget count</div>
          <div className="field title">Functions</div>
-           {this.state.faculties.map(faculty => (
-             <div className="user" key={faculty.id}>
+           {this.state.faculties.map((faculty, index) => (
+             <div className="faculty" key={faculty.id}>
                <input className="field" defaultValue={faculty.name}></input>
                <input className="field" defaultValue={faculty.generalCount}></input>
                <input className="field" defaultValue={faculty.budgetCount}></input>
                <div className="field">
                  <input className="functionality-button" type="submit" onClick={this.deleteFaculty.bind(null, faculty.id)} value="Delete"/>
-                 <input className="functionality-button" type="submit" onClick={this.saveFaculty.bind(null, faculty.id)} value="Save"/>
+                 <input className="functionality-button" type="submit" onClick={this.saveFaculty.bind(null, faculty.id, index)} value="Save"/>
                </div>
              </div>
            ))}
        </div>
        <div className={"users-add users__" + this.state.show[1]}>
-         <input id="firstName" className="users-add__input" type="text" placeholder="First name"/>
-         <input id="lastName" className="users-add__input" type="text" placeholder="Last name"/>
-         <input id="login" className="users-add__input" type="text" placeholder="login"/>
-         <input id="password" className="users-add__input" type="text" placeholder="password"/>
-         <input id="email" className="users-add__input" type="text" placeholder="email"/>
-         <input onClick={this.addUser} className="users-add__submit" type="submit" value="registration"/>
+         <input id="name" className="users-add__input" type="text" placeholder="Faculty name"/>
+         <input id="generalCount" className="users-add__input" type="text" placeholder="total count "/>
+         <input id="budgetCount" className="users-add__input" type="text" placeholder="budget count"/>
+         <input onClick={this.addFaculty} className="users-add__submit" type="submit" value="registration"/>
        </div>
 
       </div>

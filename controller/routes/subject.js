@@ -7,7 +7,7 @@ const pool = require('../db');
 router.get('/', (req, res, next) => {
   var res;
   try {
-    pool.query('SELECT * FROM faculty;', function(err, rs, fields) {
+    pool.query('SELECT * FROM subject;', function(err, rs, fields) {
       res.status(200).json(
         JSON.parse(JSON.stringify(rs))
       )
@@ -22,7 +22,7 @@ router.get('/:attrName/:attrValue', (req, res, next) => {
   var res;
   try {
     pool.query(
-      'SELECT * FROM faculty WHERE ?? = ?;',
+      'SELECT * FROM subject WHERE ?? = ?;',
       [req.params.attrName, req.params.attrValue],
       function(err, rs, fields) {
       res.status(200).json(
@@ -35,11 +35,12 @@ router.get('/:attrName/:attrValue', (req, res, next) => {
   res.status(500);
 });
 
+
 router.post('/add', (req, res, next) => {
-  var faculty = req.body;
+  var subject = req.body;
   try{
-    pool.query('INSERT INTO faculty(name, generalCount, budgetCount) VALUES (?, ?, ?)',
-      [faculty.name, faculty.generalCount, faculty.budgetCount], function(err, res, filds) {
+    pool.query('INSERT INTO subject(name, subjectTypeId) VALUES (?, ?)',
+      [subject.name, subject.subjectTypeId], function(err, res, filds) {
         if(err) throw err;
       })
   } catch(err) {
@@ -51,10 +52,9 @@ router.post('/add', (req, res, next) => {
   res.status(200).json();
 });
 
-
 router.post('/delete', (req, res, next) => {
   try{
-    pool.query('DELETE FROM faculty WHERE id = ?', req.body.id, function(err, res, fields) {
+    pool.query('DELETE FROM subject WHERE id = ?', req.body.id, function(err, res, fields) {
       if(err) throw err;
     })
   } catch(err) {
@@ -67,10 +67,10 @@ router.post('/delete', (req, res, next) => {
 
 
 router.post('/update', (req, res, next) => {
-  var faculty = req.body;
+  var subject = req.body;
   try{
-    pool.query('UPDATE faculty SET name = ?, generalCount = ?, budgetCount = ? WHERE id = ?',
-      [faculty.name, faculty.generalCount, faculty.budgetCount, faculty.id],
+    pool.query('UPDATE subject SET name = ?, subjectTypeId = ? WHERE id = ?',
+      [subject.name, subject.subjectTypeId, subject.id],
       function(err, res, fields) {
       if(err) throw err;
     })
@@ -80,7 +80,7 @@ router.post('/update', (req, res, next) => {
     )
     return;
   }
-  res.status(200).json(JSON.parse(JSON.stringify(faculty)));
+  res.status(200).json(JSON.parse(JSON.stringify(user)));
 });
 
 module.exports = router;

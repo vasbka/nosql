@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 //routes
 const userRoutes = require('./controller/routes/user');
 const facultyRoutes = require('./controller/routes/faculty');
-const customerRouters = require('./controller/routes/customer');
+const subjectRoutes = require('./controller/routes/subject');
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 // app.use('/configuration', configurationRoutes);
 app.use('/user', userRoutes);
 app.use('/faculty', facultyRoutes);
+app.use('/subject', subjectRoutes);
 
 app.use((error, req, res, next) => {0
   res.status(error.status || 500);
